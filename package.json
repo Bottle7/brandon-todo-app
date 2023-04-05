@@ -1,0 +1,13 @@
+{
+	"name": "brandon-todo-app",
+	"version": "1.0.0",
+	"description": "Todo app",
+	"scripts": {
+		"setup": "cd frontend && npm i && cd ../backend && npm i",
+		"app": "docker compose up --wait",
+		"shutdown": "docker compose down -v"
+	},
+	"keywords": [],
+	"author": "Brandon Bouchard",
+	"license": "MIT"
+}

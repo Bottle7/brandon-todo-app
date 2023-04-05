@@ -1,0 +1,153 @@
+components:
+  schemas:
+    Todo:
+      type: object
+      required:
+        - id
+        - task
+        - completed
+        - created_at
+        - updated_at
+      properties:
+        id:
+          type: number
+          description: The auto-generated id of the todo
+        task:
+          type: string
+          description: The todo item itself
+        completed:
+          type: boolean
+          description: Indicates whether the todo is complete or not
+        created_at:
+          type: string
+          format: date-time
+          description: The start date and time of the todo
+        updated_at:
+          type: string
+          format: date-time
+          description: The last updated date and time of the todo
+      example:
+        id: 123456
+        task: work
+        completed: false
+        created_at: '2022-04-06T08:30'
+        updated_at: '2022-04-07T13:45'
+
+tags:
+  name: Todos
+  description: The Todos API
+
+paths:
+  /todos:
+    get:
+      summary: Get all todos
+      tags: [Todos]
+      responses:
+        200:
+          description: Successfully retrieved todos.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+        404:
+    post:
+      summary: Create todo
+      tags: [Todos]
+      responses:
+        200:
+          description: Successfully created todo.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+        400:
+          description: Bad request.
+        404:
+          description: No todos found.
+        409:
+          description: Conflict.
+
+  /todos/{id}:
+    get:
+      summary: Get todo by id
+      tags: [Todos]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          description: The todo id
+      responses:
+        200:
+          description: Successfully retrieved todo.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        404:
+          description: Todo not found.
+
+    put:
+      summary: Replace todo by id
+      tags: [Todos]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          description: The todo id
+      responses:
+        200:
+          description: Successfully replaced todo.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        404:
+          description: Todo not found.
+
+    patch:
+      summary: Update todo by id
+      tags: [Todos]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          description: The todo id
+      responses:
+        200:
+          description: Successfully updated todo.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        404:
+          description: Todo not found.
+
+    delete:
+      summary: Delete todo by id
+      tags: [Todos]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          description: The todo id
+      responses:
+        200:
+          description: Successfully deleted todo.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        404:
+          description: Todo not found.

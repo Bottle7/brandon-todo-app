@@ -1,0 +1,49 @@
+version: '3.7'
+services:
+  #############################################################################################
+  ###                                       WEBAPP                                          ###
+  #############################################################################################
+  web-app:
+    container_name: web-app
+    tty: true
+    restart: on-failure
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      # Binds the application folder from the host inside the container enabling hot reloading
+      - ./frontend:/usr/src/app
+      # Ignores the node_modules of the host and uses it's own instead
+      - /usr/src/app/node_modules
+    networks:
+      - competition-project
+    ports:
+      - '5000:5000'
+    # We need the API to enable functionality
+    depends_on:
+      - api
+
+  #############################################################################################
+  ###                                         API                                           ###
+  #############################################################################################
+  api:
+    container_name: api
+    tty: true
+    restart: on-failure
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      # Binds the application folder from the host inside the container enabling hot reloading
+      - ./backend:/usr/src/app
+      # Ignores the node_modules of the host and uses it's own instead
+      - /usr/src/app/node_modules
+    networks:
+      - competition-project
+    ports:
+      - '3000:3000'
+
+networks:
+  competition-project:
+    # This is what enables communicatation between our containers
+    driver: 'bridge'
