@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
-import Footer from './components/public/Footer';
-import Header from './components/public/Header';
-import TodoList from './components/public/TodoList';
-import NotFound from './components/public/NotFound';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import TodoList from './components/TodoList';
+import NotFound from './components/NotFound';
 import { Box, Container } from '@chakra-ui/react';
 
 function App() {
