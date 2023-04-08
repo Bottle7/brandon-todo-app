@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState, useCallback } from 'react';
 import { Container, VStack, StackDivider, CheckboxGroup, Checkbox } from '@chakra-ui/react';
+import { handleTodoComplete } from './handlers';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
@@ -15,20 +16,6 @@ const TodoList = () => {
     getTodos().catch(console.error);
   }, [getTodos]);
 
-  const handleTodoComplete = (e) => {
-    let labelStyle = e.target.labels[0].lastChild.style;
-    console.log(e.target.checked);
-    if (e.target.checked) {
-      labelStyle.setProperty('font-style', 'italic');
-      labelStyle.setProperty('text-decoration', 'line-through');
-      labelStyle.setProperty('color', 'lightgrey');
-    } else {
-      labelStyle.removeProperty('font-style');
-      labelStyle.removeProperty('text-decoration');
-      labelStyle.removeProperty('color');
-    }
-  };
-
   return (
     <Container maxW="50%">
       <CheckboxGroup>
@@ -36,7 +23,9 @@ const TodoList = () => {
           {todos.map((todo) => (
             <Checkbox
               key={todo.id}
-              onChange={handleTodoComplete}
+              onChange={(e) => {
+                handleTodoComplete(e, todo);
+              }}
               colorScheme="yellow"
               spacing={3}
               size="lg"
