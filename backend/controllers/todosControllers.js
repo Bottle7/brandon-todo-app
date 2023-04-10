@@ -57,10 +57,12 @@ exports.post_todo = (req, res) => {
     const dateMillisForId = new Date().valueOf();
     const todoId = Number(dateMillisForId.toString().slice(7));
     const todoCreatedAt = new Date();
+    const todoCompleted = false;
 
     newTodo.id = todoId;
     newTodo.created_at = todoCreatedAt;
     newTodo.updated_at = todoCreatedAt;
+    newTodo.completed = todoCompleted;
 
     if (data) {
       data.push(newTodo); // Add todo to list of todos

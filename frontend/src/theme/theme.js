@@ -9,6 +9,7 @@ const colors = {
     700: '#699A8A', // Sea foam green
     300: '#E9BC6C', // Mustard yellow
     100: '#F1D069', // Bright yellow
+    white: '#FFF', // White
   },
 };
 
@@ -26,9 +27,15 @@ const fontSizes = {
     h1: '4.209rem',
     h2: '3.157rem',
     h3: '2.369rem',
+    btn: '1.2rem',
   },
 };
 
-const theme = extendTheme({ fonts, fontSizes, colors, components: { Checkbox: checkboxTheme } });
+const theme = extendTheme({
+  fonts,
+  fontSizes,
+  colors,
+  components: { Checkbox: checkboxTheme },
+});
 
 export default theme;
