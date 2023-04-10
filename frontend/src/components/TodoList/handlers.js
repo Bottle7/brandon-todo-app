@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { BASE_URL } from '../../constants/variables';
 
-const handleUpdateTodo = (todo) => {
+export const handleUpdateTodo = (todo) => {
   axios.patch(`${BASE_URL}/todos/${todo.id}`, todo);
 };
 

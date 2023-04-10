@@ -13,6 +13,7 @@ const Header = () => {
       h="6em"
       alignItems="center"
       zIndex="1"
+      boxShadow="0 0.1em 0.3em black"
     >
       <Heading fontFamily="fonts.heading" fontStyle="italic" as="h1">
         Brandon's Todo List
