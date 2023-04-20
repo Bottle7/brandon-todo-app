@@ -20,6 +20,7 @@ import {
   Input,
   Flex,
   Heading,
+  Text,
 } from '@chakra-ui/react';
 import { AddIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import {
@@ -27,6 +28,7 @@ import {
   handleDeleteTodo,
   handleCreateTodo,
   handleTodoComplete,
+  handleChecked,
 } from './handlers';
 
 const TodoList = () => {
@@ -86,15 +88,16 @@ const TodoList = () => {
             <HStack key={todo.id} justifyContent="space-between">
               <Checkbox
                 onChange={(e) => {
+                  handleChecked(e);
                   handleTodoComplete(e, todo);
                 }}
-                onLoadedData={(e) => handleTodoComplete(e, todo)}
                 colorScheme="yellow"
                 spacing={3}
                 size="lg"
                 alignItems="center"
+                defaultChecked={todo.completed}
               >
-                {todo.task}
+                <Text>{todo.task}</Text>
               </Checkbox>
               <ButtonGroup>
                 <Button
