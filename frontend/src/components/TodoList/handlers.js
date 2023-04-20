@@ -5,15 +5,18 @@ export const handleUpdateTodo = (todo) => {
   axios.patch(`${BASE_URL}/todos/${todo.id}`, todo);
 };
 
-const handleChecked = (checked, style) => {
-  if (checked) {
-    style.setProperty('font-style', 'italic');
-    style.setProperty('text-decoration', 'line-through');
-    style.setProperty('color', 'lightgrey');
+export const handleChecked = (e) => {
+  const labelStyle = e.target.labels[0].lastChild.style;
+  const targetChecked = e.target.checked;
+
+  if (targetChecked) {
+    labelStyle.setProperty('font-style', 'italic');
+    labelStyle.setProperty('text-decoration', 'line-through');
+    labelStyle.setProperty('color', 'lightgrey');
   } else {
-    style.removeProperty('font-style');
-    style.removeProperty('text-decoration');
-    style.removeProperty('color');
+    labelStyle.removeProperty('font-style');
+    labelStyle.removeProperty('text-decoration');
+    labelStyle.removeProperty('color');
   }
 };
 
@@ -26,11 +29,7 @@ export const handleDeleteTodo = (todoId) => {
 };
 
 export const handleTodoComplete = (e, todo) => {
-  const labelStyle = e.target.labels[0].lastChild.style;
-  const targetChecked = e.target.checked;
-
   todo.completed = e.target.checked;
 
-  handleChecked(targetChecked, labelStyle);
   handleUpdateTodo(todo);
 };
